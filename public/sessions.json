@@ -1,12 +1,1 @@
-[
-    {
-        "id": 1,
-        "title": "Volleyball Training",
-        "description": "6 v 6"
-    },
-    {
-        "id": 2,
-        "title": "Volleyball Match",
-        "description": "12 v 12"
-    }
-]
+[{"id":1,"title":"Volleyball Training","description":"6 v 6"},{"id":2,"title":"Volleyball Match","description":"12 v 12"},{"id":3,"title":"22","description":"333"}]

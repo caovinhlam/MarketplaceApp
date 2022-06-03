@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  # localhost:3000/sessions
   get '/sessions', to: 'sessions#index'
+  # localhost:3000/sessions/id
   get '/sessions/:id', to: 'sessions#show'
+  post  '/sessions', to: 'sessions#create'
 end
