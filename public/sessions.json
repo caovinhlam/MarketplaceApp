@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "title": "Volleyball Training",
+        "description": "6 v 6"
+    },
+    {
+        "id": 2,
+        "title": "Volleyball Match",
+        "description": "12 v 12"
+    }
+]
