@@ -7,23 +7,27 @@ class SessionsController < ApplicationController
     # send back all the resources to the client
 
     # render json: { sessions: sessions }
-    render json: @sessions
+    # render json: @sessions
   end
+
+  def new
+  end
+  
 
   def create
     new_session = { id: params[:id].to_i, title: params[:title], description: params[:description] }
     @sessions << new_session
     write_sessions(@sessions)
-    render plain: "Added session!"
+    redirect_to sessions_path
   end
 
   def show
-    found_session = @sessions.find do |session|
+    @session = @sessions.find do |session|
       session['id'] == params[:id].to_i
     end
-
-    render json: found_session
   end
+
+  private
 
   def write_sessions(sessions)
     File.write(Rails.public_path.join('sessions.json'), JSON.generate(sessions))
