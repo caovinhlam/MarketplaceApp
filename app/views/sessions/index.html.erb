@@ -1,9 +1,8 @@
 <h1>Sessions</h1>
 <p>Find me in app/views/sessions/index.html.erb</p>
 
-<%= @sessions %>
-
 <% @sessions.each do |session| %>
-    <p> Title: <%= link_to session['title'], session_path(session['id']) %> </p>
-    <p> Description: <%= session['description'] %> </p>
+    <p> Title: <%= link_to session.title, session_path(session.id) %> </p>
+    <p> Host: <%= session.user.full_name %></p>
+    <p> Description: <%= session.description %> </p>
 <% end %>
