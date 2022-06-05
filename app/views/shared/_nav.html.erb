@@ -1,4 +1,27 @@
-<nav>
-    <%= link_to "Home", sessions_path %>
-    <%= link_to "New Session", sessions_new_path %>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container-fluid">
+    <%= link_to "Study Session", sessions_path, class: "navbar-brand" %>
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <% if user_signed_in? %>
+            <li class="nav-item">
+                <%= link_to "My Sessions", my_session_path, class: 'nav-link' %>
+            </li>
+        <% end %>
+    </ul>
+    
+    <% if user_signed_in? %>
+        <div class="ml-auto btn-toolbar p-3">
+            Welcome, <%= current_user.full_name %>!
+        </div>
+        <div class="ml-auto btn-toolbar">
+            <%= button_to 'Logout', destroy_user_session_path, class: 'btn btn-primary', method: :delete, form: { data: { turbo_confirm: "Are you sure you want to log out? " } } %>
+        </div>
+    <% else %>
+        <div class="ml-auto btn-toolbar p-3">
+            <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-secondary' %>
+        </div>
+        <div class="ml-auto btn-toolbar">
+            <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary' %>
+        </div>
+    <% end %>
 </nav>

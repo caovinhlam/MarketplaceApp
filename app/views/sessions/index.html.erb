@@ -1,8 +1,15 @@
-<h1>Sessions</h1>
-<p>Find me in app/views/sessions/index.html.erb</p>
+<h1>Available Sessions</h1>
+
+<%= user_signed_in? ? link_to('New Session', sessions_new_path, class: "btn btn-primary") : '' %>
 
 <% @sessions.each do |session| %>
-    <p> Title: <%= link_to session.title, session_path(session.id) %> </p>
-    <p> Host: <%= session.user.full_name %></p>
-    <p> Description: <%= session.description %> </p>
+    <div class="card mt-3" style="width: 18rem;">
+        <div class="card-header">
+            <h5 class="card-title"> Title: <%= link_to session.title, session_path(session.id) %> </h5>
+        </div>
+        <div class="card-body">
+            <p> Host: <%= session.user.full_name %></p>
+            <p> Description: <%= session.description %> </p>
+        </div>
+    </div>
 <% end %>

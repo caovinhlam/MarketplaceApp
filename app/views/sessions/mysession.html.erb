@@ -1,0 +1,17 @@
+<h1>My Sessions</h1>
+
+<%= user_signed_in? ? link_to('New Session', sessions_new_path, class: "btn btn-primary") : '' %>
+
+<% @sessions.each do |session| %>
+    <% if current_user.id == session.user_id %>
+        <div class="card mt-3" style="width: 18rem;">
+            <div class="card-header">
+                <h5 class="card-title"> Title: <%= link_to session.title, session_path(session.id) %> </h5>
+            </div>
+            <div class="card-body">
+                <p> Host: <%= session.user.full_name %></p>
+                <p> Description: <%= session.description %> </p>
+            </div>
+        </div>
+    <% end %>
+<% end %>

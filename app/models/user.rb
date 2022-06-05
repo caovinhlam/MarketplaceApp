@@ -1,7 +1,12 @@
 class User < ApplicationRecord
-    has_many :sessions, dependent: :destroy
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :timeoutable
 
-    def full_name
-        return "#{first_name} #{last_name}"
-    end
+  has_many :sessions, dependent: :destroy
+
+  def full_name
+      return "#{first_name} #{last_name}"
+  end
 end
