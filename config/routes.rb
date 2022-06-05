@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'sessions/:id/edit', to: 'sessions#edit', as: 'edit_session'
   patch 'sessions/:id', to: 'sessions#update'
   post 'sessions', to: 'sessions#create'
+  delete 'sessions/:id', to: 'sessions#destroy'
 
   root 'sessions#index'
 end

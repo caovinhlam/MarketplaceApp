@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   # before_action :read_sessions
   before_action :read_users, only: [:new, :edit, :create, :update]
-  before_action :set_session, only: [:show, :update, :edit]
+  before_action :set_session, only: [:show, :update, :edit, :destroy]
   # delete this when we deploy
   skip_before_action :verify_authenticity_token
 
@@ -42,6 +42,11 @@ class SessionsController < ApplicationController
     rescue
       render 'edit'
     end
+  end
+
+  def destroy
+    @session.destroy
+    redirect_to sessions_path
   end
 
   private
