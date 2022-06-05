@@ -1,9 +1,8 @@
 class SessionsController < ApplicationController
   # delete this when we deploy
-  skip_before_action :verify_authenticity_token
-  # before_action :set_user
+  # skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_sessions
-  # before_action :set_users, only: [:new, :edit, :create, :update]
   before_action :set_session, only: [:show, :update, :edit, :destroy]
   
 

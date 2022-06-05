@@ -11,6 +11,7 @@
 The issue is that there isn't many web applications that can help people create and organise events with other people. Events such as study groups, parties or reoccuring sport socials to name a few.  
 
 ## URL 
+https://t2a2-session-app.herokuapp.com/
 
 ## Github
 https://github.com/caovinhlam/MarketplaceApp
