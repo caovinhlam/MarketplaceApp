@@ -1,11 +1,12 @@
 <%= form_with(model: @session, data: {turbo: false}) do |f| %>
-  <fieldset class="mb-2">
-    <%= f.label :user_id %>
-    <%= f.select(:user_id, @users.map { |u| [u.full_name, u.id] }) %>
-  </fieldset>
+
   <fieldset class="mb-2">
     <%= f.label :title %>
     <%= f.text_field :title %>
+  </fieldset>
+    <fieldset class="mb-2">
+    <%= f.label :user_id %>
+    <%= f.select(:user_id, @users.map { |u| [u.full_name, u.id] }) %>
   </fieldset>
   <fieldset class="mb-2">
     <%= f.label :description %>

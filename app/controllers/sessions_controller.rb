@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
-  before_action :read_sessions
-  before_action :read_users
+  # before_action :read_sessions
+  before_action :read_users, only: [:new, :edit, :create, :update]
+  before_action :set_session, only: [:show, :update, :edit]
   # delete this when we deploy
   skip_before_action :verify_authenticity_token
 
@@ -9,6 +10,13 @@ class SessionsController < ApplicationController
 
     # render json: { sessions: sessions }
     # render json: @sessions
+    @sessions = Session.all
+  end
+
+  def show
+    # @session = @sessions.find do |session|
+    #   session.id == params[:id].to_i
+    # end
   end
 
   def new
@@ -24,9 +32,15 @@ class SessionsController < ApplicationController
     redirect_to @session
   end
 
-  def show
-    @session = @sessions.find do |session|
-      session.id == params[:id].to_i
+  def edit
+  end
+
+  def update
+    begin
+      @session.update!(session_params)
+      redirect_to @session
+    rescue
+      render 'edit'
     end
   end
 
@@ -43,6 +57,10 @@ class SessionsController < ApplicationController
 
   def read_users
     @users = User.order(:first_name)
+  end
+
+  def set_session
+    @session = Session.find(params[:id])
   end
 
   def session_params

@@ -1,24 +1,27 @@
-# README
+### The issue and why does it need solving?
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+My app is trying to solve the issue of managing group study sessions for students. 
 
-Things you may want to cover:
+### URL 
 
-* Ruby version
+### Github
 
-* System dependencies
+### Description
 
-* Configuration
+#### Purpose
 
-* Database creation
+#### Features
 
-* Database initialization
+#### Sitemap
 
-* How to run the test suite
+#### Target Audience
+Mostly students who want to organise study sessions with other students.
+#### Tech Stack
+HTML, SASS, JS, RAILS, 
+### User Stories
 
-* Services (job queues, cache servers, search engines, etc.)
+### Wireframes
 
-* Deployment instructions
+### ERD and Schema
 
-* ...
+###
