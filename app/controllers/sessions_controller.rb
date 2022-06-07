@@ -1,10 +1,12 @@
 class SessionsController < ApplicationController
   # uncomment during development
-  # skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!, except: [:index, :show]
+  skip_before_action :verify_authenticity_token
+  # comment during development
+  # before_action :authenticate_user!, except: [:index, :show]
+  before_action :check_auth, only: [:mysession, :new, :create]
   before_action :set_sessions
   before_action :set_session, only: [:show, :update, :edit, :destroy]
-  
+  before_action :check_session, only: [:edit, :update, :destroy]
 
   def index
   end
@@ -56,6 +58,14 @@ class SessionsController < ApplicationController
   end
 
   private
+
+  def check_auth
+    authorize Session
+  end
+
+  def check_session
+    authorize @session
+  end
 
   # Get all sessions from DB
   def set_sessions

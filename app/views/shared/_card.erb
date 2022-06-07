@@ -1,0 +1,9 @@
+<div class="card m-3 w-25">
+  <div class="card-header">
+    <h5 class="card-title text-center inline"> <%= link_to session.title, session_path(session.id) %> </h5>
+  </div>
+  <div class="card-body">
+    <p> Host: <%= session.user.full_name %></p>
+    <p> Description: <%= session.description %> </p>
+  </div>
+</div>
