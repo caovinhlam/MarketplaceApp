@@ -4,6 +4,7 @@
   </div>
   <div class="card-body">
     <p> Host: <%= session.user.full_name %></p>
+    <%= cl_image_tag(session.cover.key, crop: :scale, class: 'w-100', cloud_name: 'meanbojji') if session.cover.attached? %>
     <p> Description: <%= session.description %> </p>
   </div>
 </div>

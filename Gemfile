@@ -81,3 +81,8 @@ gem "pg", "~> 1.3", :group => :production
 gem "rolify", "~> 6.0"
 
 gem "pundit", "~> 2.2"
+
+gem "cloudinary", "~> 1.23"
+gem "activestorage-cloudinary-service", "~> 0.2.3"
+
+gem "dotenv-rails", "~> 2.7"

@@ -22,8 +22,8 @@ class SessionsController < ApplicationController
   def create
     @session = current_user.sessions.create(session_params)
     if @session.valid?
-      # Go to show page
-      redirect_to @session
+      # Go to show page, flash a session created message
+      redirect_to @session, notice: "Session has been created!".html_safe
     else
       # Error message if session doesn't have a title
       flash.now[:alert] = @session.errors.full_messages.join('<br>').html_safe
@@ -49,9 +49,17 @@ class SessionsController < ApplicationController
 
   # Delete session from Session Model
   def destroy
-    @session.destroy
-    # Go back to home page
-    redirect_to sessions_path
+    begin
+      # Doesn't work atm, keeps asking for api_key, maybe bugged?
+      # @session.cover.purge
+      # Cloudinary::Uploader.destroy(@session.cover)
+      @session.destroy
+      # Go back to home page
+      redirect_to sessions_path
+    rescue => error_msg
+      redirect_to sessions_path, alert: error_msg
+    end
+
   end
 
   def mysession
@@ -84,7 +92,7 @@ class SessionsController < ApplicationController
 
   # Grab required parameters from the EDIT/CREATE FORMS for POST
   def session_params
-    return params.require(:session).permit(:title, :description)
+    return params.require(:session).permit(:title, :description, :cover)
   end
 
 end

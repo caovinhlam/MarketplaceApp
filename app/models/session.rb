@@ -4,4 +4,5 @@ class Session < ApplicationRecord
     # has_many :users, through: :user_sessions
     
     validates :title, presence: true
+    has_one_attached :cover
 end

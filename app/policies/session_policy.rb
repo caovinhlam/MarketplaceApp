@@ -40,6 +40,10 @@ class SessionPolicy
     create?
   end
 
+  def edit_and_destroy?
+    return @user && (edit? && destroy?)
+  end
+  
   class Scope
     def initialize(user, scope)
       @user = user

@@ -1,5 +1,4 @@
 <%= form_with(model: @session, data: {turbo: false}) do |f| %>
-
   <fieldset class="mb-2">
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -8,6 +7,16 @@
   <fieldset class="mb-2">
     <%= f.label :description %>
     <%= f.text_field :description %>
+  </fieldset>
+
+  <% if @session.cover.attached? %>
+    <fieldset class="mb-2">
+      <%= cl_image_tag @session.cover.key, transformation: ["media_lib_thumb"], cloud_name: 'meanbojji' %>
+    </fieldset>
+  <% end %>
+  <fieldset class="mb-2">
+    <%= f.label :cover %>
+    <%= f.file_field :cover %>
   </fieldset>
 
   <fieldset>
