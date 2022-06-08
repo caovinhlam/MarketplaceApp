@@ -8,18 +8,24 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
   </fieldset>
+  
+  <fieldset class="mb-2">
+    <%= f.label :category_id %>
+    <%= f.collection_select :category_id, @categories, :id, :name %>
+  </fieldset>
 
   <% if @session.cover.attached? %>
     <fieldset class="mb-2">
       <%= cl_image_tag @session.cover.key, transformation: ["media_lib_thumb"], cloud_name: 'meanbojji' %>
     </fieldset>
   <% end %>
+
   <fieldset class="mb-2">
     <%= f.label :cover %>
     <%= f.file_field :cover %>
   </fieldset>
 
   <fieldset>
-    <%= f.submit class: 'btn btn-primary' %>    
+    <%= f.submit class: 'btn btn-primary' %>
   </fieldset>
 <% end %>

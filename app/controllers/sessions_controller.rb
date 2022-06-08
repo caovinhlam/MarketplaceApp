@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
   before_action :check_auth, only: [:mysession, :new, :create]
   before_action :set_sessions
   before_action :set_session, only: [:show, :update, :edit, :destroy]
+  before_action :set_categories
   before_action :check_session, only: [:edit, :update, :destroy]
 
   def index
@@ -75,14 +76,14 @@ class SessionsController < ApplicationController
     authorize @session
   end
 
-  # Get all sessions from DB
-  def set_sessions
-    @sessions = Session.all
-  end
-
   # Get all users from DB and order by first name
   def set_users
     @users = User.order(:first_name)
+  end
+  
+  # Get all sessions from DB
+  def set_sessions
+    @sessions = Session.all
   end
 
   # Get a specific session from their ID
@@ -90,9 +91,14 @@ class SessionsController < ApplicationController
     @session = Session.find(params[:id])
   end
 
+  # Get all categories from DB and order by name
+  def set_categories
+    @categories = Category.order(:name)
+  end
+
   # Grab required parameters from the EDIT/CREATE FORMS for POST
   def session_params
-    return params.require(:session).permit(:title, :description, :cover)
+    return params.require(:session).permit(:title, :description, :cover, :category_id)
   end
 
 end

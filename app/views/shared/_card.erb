@@ -3,7 +3,8 @@
     <h5 class="card-title text-center inline"> <%= link_to session.title, session_path(session.id) %> </h5>
   </div>
   <div class="card-body">
-    <p> Host: <%= session.user.full_name %></p>
+    <p> Host: <%= session.user.full_name %> </p>
+    <p> Category: <%= session.category.name %> </p>
     <%= cl_image_tag(session.cover.key, crop: :scale, class: 'w-100', cloud_name: 'meanbojji') if session.cover.attached? %>
     <p> Description: <%= session.description %> </p>
   </div>

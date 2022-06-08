@@ -7,15 +7,23 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.destroy_all
+Category.destroy_all
 Session.destroy_all
 user = User.create(email: 'admin@test.com', password: 'admin123', first_name: 'First', last_name: 'Admin')
 user2 = User.create(email: 'user@test.com', password: 'user123', first_name: 'Second', last_name: 'User')
 user3 = User.create(email: '123@test.com', password: '123123', first_name: 'Third', last_name: 'Number')
 
-user.sessions.create(title: "Volleyball Training", description: "1 Courts - 6 v 6")
-user.sessions.create(title: "Volleyball Match", description: "2 Court - 6 v 6")
-user2.sessions.create(title: "User Match", description: "3 Court - 6 v 6")
-user3.sessions.create(title: "Test Match", description: "123 Court - 123 v 123")
+cjson = JSON.parse(File.read(Rails.public_path.join('categories.json')))
+
+cjson.each do |c|
+    Category.create(name: c['category'])
+end
+
+Session.create(title: "Volleyball Training", description: "2 Courts - 6 v 6", user: user, category: Category.find_by(name: 'Sport'))
+Session.create(title: "LCS", description: "E-sports: 5 v 5", user: user, category: Category.find_by(name: 'Contest'))
+Session.create(title: "Please HELP!", description: "I need MONEY as soon as possible, please buy my merch", user: user2, category: Category.find_by(name: 'Fundraising'))
+Session.create(title: "GAME TESTING!", description: "Learn how to be look for bugs and play while getting PAID!", user: user3, category: Category.find_by(name: 'Classes'))
 
 puts "Users: #{User.count}"
+puts "Categories: #{Category.count}"
 puts "Sessions: #{Session.count}"
