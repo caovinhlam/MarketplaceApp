@@ -7,5 +7,17 @@
     <p> Category: <%= session.category.name %> </p>
     <%= cl_image_tag(session.cover.key, crop: :scale, class: 'w-100', cloud_name: 'meanbojji') if session.cover.attached? %>
     <p> Description: <%= session.description %> </p>
+    <% if user_signed_in? %>
+      <% if action_name == 'show' %>
+        <%= link_to('Attend', link_session_path(session), class: 'btn btn-success') %>
+      <% elsif action_name == 'link_session'%>
+        <%= link_to('Cancel', unlink_session_path(session), class: 'btn btn-danger', method: :delete, form: { data: { turbo_confirm: "Are you sure you want to cancel '#{session.title}' ?" } }) %>
+      <% end %>
+    <%end%>
+    <% if session.attendees.length > 0 %>
+      <% session.attendees.each do |attendee| %>
+        <p>Hi I am <%= attendee.full_name %> and I'm attending <%= session.title %> </p>
+      <% end %>
+    <% end %>
   </div>
 </div>

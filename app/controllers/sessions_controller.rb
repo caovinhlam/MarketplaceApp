@@ -1,11 +1,11 @@
 class SessionsController < ApplicationController
   # uncomment during development
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
   # comment during development
-  # before_action :authenticate_user!, except: [:index, :show]
-  before_action :check_auth, only: [:mysession, :new, :create]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :check_auth, only: [:my_session, :new, :create]
   before_action :set_sessions
-  before_action :set_session, only: [:show, :update, :edit, :destroy]
+  before_action :set_session, only: [:show, :update, :edit, :destroy, :link_session, :unlink_session]
   before_action :set_categories
   before_action :check_session, only: [:edit, :update, :destroy]
 
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
 
   # Grab current_user for their ID and associate ID as FK in session entity
   def create
-    @session = current_user.sessions.create(session_params)
+    @session = Session.create(session_params)
     if @session.valid?
       # Go to show page, flash a session created message
       redirect_to @session, notice: "Session has been created!".html_safe
@@ -51,19 +51,26 @@ class SessionsController < ApplicationController
   # Delete session from Session Model
   def destroy
     begin
-      # Doesn't work atm, keeps asking for api_key, maybe bugged?
-      # @session.cover.purge
-      # Cloudinary::Uploader.destroy(@session.cover)
       @session.destroy
       # Go back to home page
       redirect_to sessions_path
     rescue => error_msg
       redirect_to sessions_path, alert: error_msg
     end
-
   end
 
-  def mysession
+  def my_session
+  end
+
+  def link_session
+    if !current_user.sessions.exists?(@session.id)
+      @session.attendees << current_user
+    end
+  end
+
+  def unlink_session
+    current_user.sessions.where(id: @session.id).destroy
+    redirect_to session_path
   end
 
   private
@@ -98,7 +105,7 @@ class SessionsController < ApplicationController
 
   # Grab required parameters from the EDIT/CREATE FORMS for POST
   def session_params
-    return params.require(:session).permit(:title, :description, :cover, :category_id)
+    return params.require(:session).permit(:title, :description, :cover, :category_id, :user_id)
   end
 
 end

@@ -24,7 +24,7 @@
     <%= f.label :cover %>
     <%= f.file_field :cover %>
   </fieldset>
-
+  <%= f.hidden_field :user_id, value: current_user.id%>
   <fieldset>
     <%= f.submit class: 'btn btn-primary' %>
   </fieldset>

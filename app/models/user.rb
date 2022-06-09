@@ -4,7 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :timeoutable
 
-  has_many :sessions, dependent: :destroy
+  has_many :sessions, class_name: "Session", foreign_key: "user_id", dependent: :destroy
+  has_many :user_sessions, foreign_key: "attendee_id"
+  has_many :sessions, through: :user_sessions, source: :session
+  
   # has_many :user_sessions
   # has_many :sessions, through: :user_sessions
  

@@ -19,10 +19,12 @@ cjson.each do |c|
     Category.create(name: c['category'])
 end
 
-Session.create(title: "Volleyball Training", description: "2 Courts - 6 v 6", user: user, category: Category.find_by(name: 'Sport'))
-Session.create(title: "LCS", description: "E-sports: 5 v 5", user: user, category: Category.find_by(name: 'Contest'))
-Session.create(title: "Please HELP!", description: "I need MONEY as soon as possible, please buy my merch", user: user2, category: Category.find_by(name: 'Fundraising'))
-Session.create(title: "GAME TESTING!", description: "Learn how to be look for bugs and play while getting PAID!", user: user3, category: Category.find_by(name: 'Classes'))
+s1 = Session.create(title: "Volleyball Training", description: "2 Courts - 6 v 6", user: user, category: Category.find_by(name: 'Sport'))
+s2 = Session.create(title: "LCS", description: "E-sports: 5 v 5", user: user, category: Category.find_by(name: 'Contest'))
+s3 = Session.create(title: "Please HELP!", description: "I need MONEY as soon as possible, please buy my merch", user: user2, category: Category.find_by(name: 'Fundraising'))
+s4 = Session.create(title: "GAME TESTING!", description: "Learn how to be look for bugs and play while getting PAID!", user: user3, category: Category.find_by(name: 'Classes'))
+
+puts user2.sessions << s1
 
 puts "Users: #{User.count}"
 puts "Categories: #{Category.count}"

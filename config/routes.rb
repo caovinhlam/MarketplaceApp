@@ -12,14 +12,16 @@ Rails.application.routes.draw do
   # localhost:3000/sessions
   devise_for :users
   get 'sessions', to: 'sessions#index'
-  get 'sessions/mysession', to: 'sessions#mysession', as: 'my_session'
+  get 'sessions/my_session', to: 'sessions#my_session', as: 'my_session'
   get 'sessions/new', to: 'sessions#new'
   get 'sessions/:id', to: 'sessions#show', as: 'session'
   get 'sessions/:id/edit', to: 'sessions#edit', as: 'edit_session'
   
+  get 'sessions/:id/link', to: 'sessions#link_session', as: 'link_session'
   patch 'sessions/:id', to: 'sessions#update'
   post 'sessions', to: 'sessions#create'
   delete 'sessions/:id', to: 'sessions#destroy'
+  delete 'sessions/:id/link', to: 'sessions#unlink_session', as: 'unlink_session'
 
   root 'sessions#index'
 end

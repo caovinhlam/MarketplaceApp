@@ -36,7 +36,7 @@ class SessionPolicy
     update?
   end
 
-  def mysession?
+  def my_session?
     create?
   end
 
